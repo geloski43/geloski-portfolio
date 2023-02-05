@@ -1,0 +1,191 @@
+nav {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 300px;
+  z-index: 1;
+}
+
+.background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 300px;
+  background: linear-gradient(to right, rgb(223, 88, 88), rgb(37, 37, 45));
+  border-bottom-right-radius: 25px;
+}
+
+button {
+  outline: none;
+  border: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  cursor: pointer;
+  position: absolute;
+  top: 18px;
+  left: 15px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: transparent;
+}
+
+ul,
+li {
+  margin: 0;
+  padding: 0;
+}
+
+ul {
+  padding: 25px;
+  position: absolute;
+  top: 100px;
+  width: 230px;
+}
+
+li {
+  list-style: none;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.icon-placeholder {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  flex: 40px 0;
+  margin-right: 20px;
+}
+
+.text-placeholder {
+  border-radius: 5px;
+  width: 200px;
+  height: 20px;
+  flex: 1;
+}
+
+.refresh {
+  padding: 10px;
+  position: absolute;
+  background: rgba(0, 0, 0, 0.4);
+  border-radius: 10px;
+  width: 20px;
+  height: 20px;
+  top: 10px;
+  right: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.header {
+  position: absolute;
+  top: 1em;
+  left: 0;
+  color: white;
+  font-family: 'Josefin Sans', sans-serif;
+  font-weight: 900;
+  font-size: 1em;
+  width: 100%;
+  text-align: center;
+}
+
+.header > span {
+  padding: 0 3.25em;
+  letter-spacing: 0.4em;
+  position: relative;
+  z-index: 100;
+  cursor: pointer;
+}
+
+/* .header > #menu-item.active::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: calc(50% - 4px);
+  transform: translate3d(-50%, 0, 0);
+  width: 50%;
+  height: 2px;
+  color: indianred;
+  z-index: 100;
+  cursor: pointer;
+} */
+
+#menu-item.active {
+  color: indianred;
+}
+
+#menu-item.active {
+  color: indianred;
+}
+
+#menu-item:hover {
+  color: indianred;
+}
+
+#menu-item::after {
+  content: '';
+  position: absolute;
+  width: 50%;
+  transform: scaleX(0);
+  height: 2px;
+  bottom: -10px;
+  left: calc(25% - 4px);
+  background-color: indianred;
+  transform-origin: center;
+  transition: transform 0.25s ease-out;
+}
+
+#menu-item:hover::after {
+  transform: scaleX(1);
+  transform-origin: center;
+}
+
+.middle {
+  pointer-events: none;
+  position: absolute;
+  bottom: 2.5em;
+  left: 50%;
+  transform: translate3d(-50%, 0, 0);
+  font-size: 2em;
+  letter-spacing: 0.5em;
+  text-align: center;
+  width: 100%;
+  z-index: 100;
+  cursor: pointer;
+}
+
+.middle > h1 {
+  line-height: 0.9em;
+  font-weight: 100;
+  z-index: 100;
+  cursor: pointer;
+}
+
+.middle > h1::after {
+  content: '';
+  position: absolute;
+  bottom: 10px;
+  left: calc(50% - 25px);
+  width: 50px;
+  height: 2px;
+  background: white;
+  z-index: 100;
+  cursor: pointer;
+}
+
+.middle > h2 {
+  font-size: 1em;
+  line-height: 0px;
+  font-weight: 100;
+  letter-spacing: 0.25em;
+  font-style: italic;
+  z-index: 100;
+  cursor: pointer;
+}
