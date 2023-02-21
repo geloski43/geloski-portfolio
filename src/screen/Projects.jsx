@@ -7,7 +7,6 @@ import Startup from '../components/projects/Startup';
 import ProjectsList from '../components/projects/ProjectsList';
 import { Context as AppContext } from '../context/appContext';
 import _ from 'lodash';
-import { Center } from '@chakra-ui/react';
 
 const Projects = () => {
   const appContext = useContext(AppContext);
@@ -37,15 +36,7 @@ const Projects = () => {
   const onScroll = (e) => (state.top.current = e.target.scrollTop);
   useEffect(() => void onScroll({ target: scrollArea.current }), []);
   return (
-    <Suspense
-      fallback={
-        <Center>
-          <span style={{ fontSize: '1rem', paddingTop: '40%' }}>
-            Loading...
-          </span>
-        </Center>
-      }
-    >
+    <>
       <Canvas
         linear
         dpr={[1, 2]}
@@ -72,7 +63,7 @@ const Projects = () => {
         ))}
         <FooterLinks />
       </div>
-    </Suspense>
+    </>
   );
 };
 
