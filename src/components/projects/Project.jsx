@@ -31,7 +31,7 @@ export default function Project({
   const alignRight = (canvasWidth - w * size - margin) / 2;
   const pixelWidth = w * state.zoom * size;
   const left = !(index % 2);
-  const color = projectPlatform === 'web' ? '#7fffd4' : '#c70f46'; // '#7fffd4', '#c70f46'
+  const color = projectPlatform === 'web' ? '#c70f46' : '#7fffd4'; // '#7fffd4', '#c70f46'
 
   const onClick = (url) => {
     // console.log(item[1].href);
@@ -146,7 +146,7 @@ export default function Project({
                     icon={
                       <GoBrowser
                         fontSize={!isDesktop ? '0.5rem' : '.8rem'}
-                        color={projectPlatform === 'web' ? 'black' : 'white'}
+                        color={projectPlatform === 'web' ? 'white' : 'black'}
                       />
                     }
                   />
@@ -168,7 +168,7 @@ export default function Project({
                       icon={
                         <GoDeviceMobile
                           fontSize={!isDesktop ? '0.5rem' : '0.8rem'}
-                          color={projectPlatform === 'web' ? 'black' : 'white'}
+                          color={projectPlatform === 'web' ? 'white' : 'black'}
                         />
                       }
                     />
