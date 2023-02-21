@@ -5,7 +5,6 @@ import { useDimensions } from './use-dimensions';
 import { MobileMenuToggle } from './MobileMenuToggle';
 import { MobileNavRoutesList } from './MobileNavRoutesList';
 import { Context as AppContext } from '../../context/appContext';
-
 import './styles.css';
 
 const sidebar = {
@@ -36,6 +35,7 @@ export const MobileAppNavigation = () => {
 
   return (
     <motion.nav
+      style={{ zIndex: showSideMenu ? 1 : null }}
       initial={false}
       animate={showSideMenu ? 'open' : 'closed'}
       custom={height}

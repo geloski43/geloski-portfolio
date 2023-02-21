@@ -82,7 +82,7 @@ export const { Provider, Context } = createDataContext(
     setStripes,
   },
   {
-    projectPlatform: 'web',
+    projectPlatform: 'mobile',
     projects: [],
     showSideMenu: false,
     sections: null,

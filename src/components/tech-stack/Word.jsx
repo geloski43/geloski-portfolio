@@ -1,9 +1,13 @@
 import * as THREE from 'three';
-import { useRef, useState, useEffect } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { useFrame } from '@react-three/fiber';
 import { Text } from '@react-three/drei';
 
 export default function Word({ item, children, ...props }) {
+  // console.log(item[0]);
+
+  const vector = item[0];
+
   const onClick = () => {
     // console.log(item[1].href);
     window.open(
@@ -38,6 +42,7 @@ export default function Word({ item, children, ...props }) {
       0.1
     );
   });
+
   return (
     <Text
       ref={ref}

@@ -6,6 +6,7 @@ import { Block, useBlock } from '../../blocks';
 import state from '../../store';
 import { GoBrowser, GoDeviceMobile } from 'react-icons/go';
 import { HStack, IconButton, VStack, useMediaQuery } from '@chakra-ui/react';
+import { Context as AppContext } from '../../context/appContext';
 
 export default function Project({
   image,
@@ -18,6 +19,9 @@ export default function Project({
   projectPlatform,
   ...props
 }) {
+  const appContext = React.useContext(AppContext);
+  const { showSideMenu } = appContext.state;
+
   const [isDesktop] = useMediaQuery('(min-width: 1000px)');
   const [isTablet] = useMediaQuery('(max-width: 820px)');
   const [isMobile] = useMediaQuery('(max-width: 400px)');
@@ -39,192 +43,146 @@ export default function Project({
 
   const mobilePlatform = props.platform === 'mobile';
 
-  // desktop views
-  const leftAndForWeb = React.useMemo(() => {
-    return [(-w * size) / pixelWidth - 1, -4.9, 1];
-  }, [props]);
-
-  const rigthAndForWeb = React.useMemo(() => {
-    return [-w * size + 1.3, -5.1, 1];
-  }, [size, w, pixelWidth]);
-
-  const rightAndForWebApp = React.useMemo(() => {
-    return [-w * size + pixelWidth * 0.0017, -8.1, 1];
-  }, [size, w, pixelWidth]);
-
-  // tablet views
-  const leftAndForTablet = [(-w * size) / pixelWidth - 0.65, -1, 1];
-  const rightAndForTablet = [-w * size + 0.5, -1.1, 1];
-  const rightAndForTabletApp = [-w * size + pixelWidth * 0.002, -1.95, 1];
-
-  // mobile views
-  const leftAndForMobile = [-w, -0.3, 1];
-  const rightAndForMobile = [-w * 1.9, -0.3, 1];
-  const rightAndForMobileApp = [-w * 1.79, -1.95, 1];
-
-  // const resetShowButton = React.useCallback(() => {
-  //   setShowButton(
-  //     Array.from(Array(!isEmpty(results) && results.length).keys()).map(
-  //       (v) => (v = { show: false })
-  //     )
-  //   );
-  // }, [results]);
-
-  const alignedLeftAndForWeb = React.useCallback(() => {
-    return isDesktop
-      ? leftAndForWeb
-      : isTablet
-      ? leftAndForTablet
-      : leftAndForMobile;
-  }, [size, w, pixelWidth]);
-
-  const alignedRightAndForWeb = React.useCallback(() => {
-    return isDesktop
-      ? rigthAndForWeb
-      : isTablet
-      ? rightAndForTablet
-      : rightAndForMobile;
-  }, [size, w, pixelWidth]);
-
-  const alignedRightAndForMobile = React.useCallback(() => {
-    return isDesktop
-      ? rightAndForWebApp
-      : isTablet
-      ? rightAndForTabletApp
-      : rightAndForMobileApp;
-  }, [size, w, pixelWidth]);
-
   return (
     <Block factor={factor} offset={offset}>
       <group position={[left ? -alignRight : alignRight, 0, 0]}>
         <Plane
           map={image}
           args={[1, 1, 32, 32]}
-          shift={300}
+          shift={70}
           size={size}
           aspect={aspect}
           scale={[w * size, (w * size) / aspect, 1]}
           frustumCulled={false}
         />
-        <Html
-          style={{
-            width: pixelWidth / (!isDesktop ? 1 : 2),
-            textAlign: left ? 'left' : 'right',
-          }}
-          position={[
-            left || !isDesktop ? (-w * size) / 2 : 0,
-            isMobile
-              ? (-w * size) / 2 / aspect - 0.9
-              : (-w * size) / 2 / aspect - 0.4,
-            1,
-          ]}
-        >
-          <div
-            tabIndex={index}
-            style={{
-              fontSize: !isDesktop ? 20 : 24,
-              color: color,
-              width: pixelWidth / (!isDesktop ? 1 : 2),
-            }}
-          >
-            {description}
-          </div>
-        </Html>
 
-        <Html
-          transform
-          style={{
-            width: pixelWidth / (mobile ? 1 : 2),
-            textAlign: left ? 'left' : 'right',
-            position: 'absolute',
-          }}
-          // position is x, y, z axis for array values
-          position={
-            projectPlatform === 'web'
-              ? left
-                ? [
-                    isMobile ? size - 5.3 : size - 1.7,
-                    isTablet ? -1.05 : -2.1,
-                    1,
-                  ]
-                : [
-                    isMobile ? -w * size - 3.81 : -w * size + 0.5,
-                    isTablet ? -1.05 : -2.1,
-                    1,
-                  ]
-              : // mobile apps positioning of views
-              left
-              ? [isMobile ? size - 5.3 : size - 1.79, isTablet ? -1.9 : -3.5, 1]
-              : [
-                  isMobile
-                    ? -w * size - 3.3
-                    : isTablet
-                    ? -w * size + 0.63
-                    : -w * size + 0.8,
-                  isTablet ? -1.9 : -3.5,
-                  1,
-                ]
-          }
-        >
-          <VStack
-            alignItems={left ? (mobile ? 'center' : 'flex-start') : 'flex-end'}
-          >
-            <HStack justifyContent="space-evenly" alignItems="center">
-              <IconButton
-                h={!isDesktop ? '25px' : '25px'}
-                w={!isDesktop ? '25px' : '25px'}
-                bg={color}
-                _hover={{ opacity: 0.9 }}
-                onClick={() => onClick(props.url.web)}
-                aria-label="Open in browser"
-                icon={
-                  <GoBrowser
-                    fontSize={!isDesktop ? '0.5rem' : '1rem'}
-                    color="#2c5e8f"
-                  />
+        {showSideMenu ? null : (
+          <>
+            <Html
+              style={{
+                // width: pixelWidth / (!isDesktop ? 1 : 2),
+                textAlign: left ? 'left' : 'right',
+              }}
+              position={[
+                left || !isDesktop
+                  ? (-w * size) / 2
+                  : mobilePlatform
+                  ? -3.5
+                  : -5,
+                isMobile
+                  ? (-w * size) / 2 / aspect - 0.9
+                  : (-w * size) / 2 / aspect - 0.4,
+                1,
+              ]}
+            >
+              <div
+                tabIndex={index}
+                style={{
+                  fontSize: !isDesktop ? 20 : 24,
+                  color: 'white',
+                  width: pixelWidth / (!isDesktop ? 1 : 1),
+                }}
+              >
+                {description}
+              </div>
+            </Html>
+
+            <Html
+              transform
+              style={{
+                width: pixelWidth / (mobile ? 1 : 2),
+                textAlign: left ? 'left' : 'right',
+                position: 'absolute',
+              }}
+              // position is x, y, z axis for array values
+              position={
+                projectPlatform === 'web'
+                  ? left
+                    ? [
+                        isMobile ? size - 5.3 : size - 1.7,
+                        isTablet ? -1.05 : -2.1,
+                        1,
+                      ]
+                    : [
+                        isMobile ? -w * size - 3.81 : -w * size + 0.5,
+                        isTablet ? -1.05 : -2.1,
+                        1,
+                      ]
+                  : // mobile apps positioning of views
+                  left
+                  ? [
+                      isMobile ? size - 5.3 : size - 1.79,
+                      isTablet ? -1.9 : -3.5,
+                      1,
+                    ]
+                  : [
+                      isMobile
+                        ? -w * size - 3.3
+                        : isTablet
+                        ? -w * size + 0.63
+                        : -w * size + 0.8,
+                      isTablet ? -1.9 : -3.5,
+                      1,
+                    ]
+              }
+            >
+              <VStack
+                alignItems={
+                  left ? (mobile ? 'center' : 'flex-start') : 'flex-end'
                 }
-              />
+              >
+                <HStack justifyContent="space-evenly" alignItems="center">
+                  <IconButton
+                    pr="1"
+                    h={!isDesktop ? '25px' : '25px'}
+                    w={!isDesktop ? '25px' : '25px'}
+                    bg={color}
+                    _hover={{
+                      transform: 'scale(1.3)',
+                      transitionDuration: '0.3s',
+                    }}
+                    onClick={() => onClick(props.url.web)}
+                    aria-label="Open in browser"
+                    icon={
+                      <GoBrowser
+                        fontSize={!isDesktop ? '0.5rem' : '.8rem'}
+                        color={projectPlatform === 'web' ? 'black' : 'white'}
+                      />
+                    }
+                  />
 
-              {props.platform === 'mobile' ? (
-                <IconButton
-                  h={!isDesktop ? '25px' : '25px'}
-                  w={!isDesktop ? '25px' : '25px'}
-                  bg={color}
-                  _hover={{ opacity: 0.6 }}
-                  onClick={() => {
-                    onClick(props.url.mobile);
-                  }}
-                  aria-label="Open with smartphone"
-                  icon={
-                    <GoDeviceMobile
-                      fontSize={!isDesktop ? '0.5rem' : '1rem'}
-                      color="#2c5e8f"
+                  {props.platform === 'mobile' ? (
+                    <IconButton
+                      pr="1"
+                      h={!isDesktop ? '25px' : '25px'}
+                      w={!isDesktop ? '25px' : '25px'}
+                      bg={color}
+                      _hover={{
+                        transform: 'scale(1.3)',
+                        transitionDuration: '0.3s',
+                      }}
+                      onClick={() => {
+                        onClick(props.url.mobile);
+                      }}
+                      aria-label="Open with smartphone"
+                      icon={
+                        <GoDeviceMobile
+                          fontSize={!isDesktop ? '0.5rem' : '0.8rem'}
+                          color={projectPlatform === 'web' ? 'black' : 'white'}
+                        />
+                      }
                     />
-                  }
-                />
-              ) : null}
-            </HStack>
-          </VStack>
-        </Html>
-
-        {/* <Html
-          position={[
-            left || mobile ? (-w * size) / 2 : 0,
-            (-w * size) / 2 / aspect - 0.4,
-            1,
-          ]}
-        >
-          <HStack spacing="-1px" w="100%">
-            <Icon color="#00a850" fontSize="1.7rem" as={GoBrowser} />
-            <Icon color="#00a850" fontSize="1.7rem" as={GoDeviceMobile} />
-          </HStack>
-        </Html> */}
+                  ) : null}
+                </HStack>
+              </VStack>
+            </Html>
+          </>
+        )}
 
         <Text
           left={left}
           right={!left}
           size={w * 0.04}
-          color={color}
           top
           position={[
             ((left ? -w : w) * size) / 2,
@@ -240,7 +198,7 @@ export default function Project({
             size={w * 0.5}
             color="#1A1E2A"
             position={[
-              ((left ? w : -w) / 2) * size,
+              ((left ? -w * 0.1 : -w * 0.5) / 2) * size,
               (w * size) / aspect / 1,
               -10,
             ]}

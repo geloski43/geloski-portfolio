@@ -28,9 +28,10 @@ export const MobileMenuItem = ({ href, label, i }) => {
   const [isLessThan393] = useMediaQuery('(max-width: 393px)');
 
   const style = {
-    border: `2px solid ${colors[i]}`,
+    border: `2px solid #447BBE`,
     borderRadius: 10,
     paddingInline: 5,
+    background: '#2B3784',
   };
 
   const [location, setLocation] = useLocation();
@@ -40,13 +41,17 @@ export const MobileMenuItem = ({ href, label, i }) => {
     <motion.li
       style={{ paddingInline: 10 }}
       variants={variants}
-      whileHover={{ scale: 1.1 }}
       whileTap={{ scale: 0.95 }}
     >
       <Link onClick={() => appContext.setShowSideMenu(false)} href={href}>
         <Text
-          margin={isLessThan393 ? '0.977' : '1.5'}
-          fontSize={{ base: '22px', sm: '30px', md: '30px', lg: '30px' }}
+          _hover={{
+            textDecoration: 'underline',
+            transitionDuration: '0.3s',
+          }}
+          margin="-1"
+          ml="2"
+          fontSize={{ base: '16px', sm: '16px', md: '16px', lg: '24px' }}
           color="orange"
           style={location === href ? style : null}
         >

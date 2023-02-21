@@ -23,7 +23,6 @@
     "dat.gui": "^0.7.9",
     "framer-motion": "^8.0.1",
     "framer-motion-3d": "^8.5.4",
-    "gsap": "^3.11.4",
     "lerp": "^1.0.3",
     "lodash": "^4.17.21",
     "maath": "^0.5.2",

@@ -7,14 +7,13 @@ import { MobileAppNavigation } from './components/navigation/MobileAppNavigation
 import About from './screen/About';
 import '@fortawesome/fontawesome-free/js/all.js';
 import { useMediaQuery } from '@chakra-ui/react';
-import FooterLinks from './components/FooterLinks';
 
 const App = () => {
-  const [isMoreThan1400] = useMediaQuery('(min-width: 1200px)');
+  const [isMobile] = useMediaQuery('(max-width: 400px)');
 
   return (
     <>
-      {isMoreThan1400 ? <AppNavigation /> : <MobileAppNavigation />}
+      {isMobile ? <MobileAppNavigation /> : <AppNavigation />}
       <Switch>
         <Route path="/" component={About} />
         <Route path="/projects" component={Projects} />

@@ -12,7 +12,15 @@ const Path = (props) => (
 );
 
 export const MobileMenuToggle = ({ toggle }) => (
-  <button style={{ paddingLeft: 12 }} onClick={toggle}>
+  <button
+    style={{
+      paddingLeft: 14,
+      paddingTop: 5,
+      zIndex: 10,
+      backgroundColor: '#FFE81F',
+    }}
+    onClick={toggle}
+  >
     <svg width="23" height="23" viewBox="0 0 23 23">
       <Path
         variants={{

@@ -57,7 +57,7 @@ const FooterLinks = () => {
           />
         </ButtonGroup>
         <Text
-          fontSize={{ base: '16px', sm: '16px', md: '16px', lg: '16px' }}
+          fontSize={{ base: '12px', sm: '16px', md: '16px', lg: '16px' }}
           as="kbd"
           align={'center'}
           fontWeight="extrabold"

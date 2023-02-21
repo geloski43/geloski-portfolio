@@ -31,7 +31,7 @@ export default function ProjectsList() {
     return [
       {
         offset: -0.057,
-        color: projectPlatform !== 'web' ? '#454545' : '#000000',
+        color: projectPlatform !== 'web' ? 'gray' : '#4C5270',
         height: 7,
       },
       {
@@ -109,7 +109,7 @@ export default function ProjectsList() {
             shift={-4}
             color={color}
             rotation={[0, 0, Math.PI / 8]}
-            position={[0, 0, -10]}
+            position={[0, -0.35, -10]}
           />
         </Block>
       ))}

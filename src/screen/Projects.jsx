@@ -7,17 +7,18 @@ import Startup from '../components/projects/Startup';
 import ProjectsList from '../components/projects/ProjectsList';
 import { Context as AppContext } from '../context/appContext';
 import _ from 'lodash';
+import { Center } from '@chakra-ui/react';
 
 const Projects = () => {
   const appContext = useContext(AppContext);
   const {
     projectPlatform,
-    projects,
-    showSideMenu,
-    sections,
-    pages,
-    zoom,
-    stripes,
+    // projects,
+    // showSideMenu,
+    // sections,
+    // pages,
+    // zoom,
+    // stripes,
   } = appContext.state;
 
   const memoizedProjects = useMemo(() => {
@@ -36,17 +37,23 @@ const Projects = () => {
   const onScroll = (e) => (state.top.current = e.target.scrollTop);
   useEffect(() => void onScroll({ target: scrollArea.current }), []);
   return (
-    <>
+    <Suspense
+      fallback={
+        <Center>
+          <span style={{ fontSize: '1rem', paddingTop: '40%' }}>
+            Loading...
+          </span>
+        </Center>
+      }
+    >
       <Canvas
         linear
         dpr={[1, 2]}
         orthographic
         camera={{ zoom: state.zoom, position: [0, 0, 500] }}
       >
-        <Suspense fallback={null}>
-          <ProjectsList />
-          <Startup />
-        </Suspense>
+        <ProjectsList />
+        <Startup />
       </Canvas>
 
       <div
@@ -65,7 +72,7 @@ const Projects = () => {
         ))}
         <FooterLinks />
       </div>
-    </>
+    </Suspense>
   );
 };
 

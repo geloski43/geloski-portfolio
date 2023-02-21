@@ -9,7 +9,7 @@ import { Context as AppContext } from '../../../context/appContext';
 
 export default function AnimatedSwitch() {
   const appContext = useContext(AppContext);
-  const { projectPlatform, projects } = appContext.state;
+  const { projectPlatform, showSideMenu } = appContext.state;
 
   const [toggle, set] = useState(0);
   // Set up a shared spring which simply animates the toggle above
@@ -29,12 +29,13 @@ export default function AnimatedSwitch() {
         backgroundColor: 'transparent',
         color: x.to([0, 1], ['#7fffd4', '#c70f46']),
         marginTop: 90,
+        zIndex: showSideMenu ? 0 : 1,
       }}
     >
       {projectPlatform === 'mobile' ? (
-        <h1 className="open" children="Mobile" />
+        <h1 className="close" children="Mobile" />
       ) : (
-        <h1 className="close" children="Web" />
+        <h1 className="open" children="Web" />
       )}
 
       {/* <a.h1>{x.to((x) => (x + 8).toFixed(2))}</a.h1> */}

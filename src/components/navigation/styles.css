@@ -4,7 +4,6 @@ nav {
   left: 0;
   bottom: 0;
   width: 300px;
-  z-index: 1;
 }
 
 .background {
@@ -12,9 +11,10 @@ nav {
   top: 0;
   left: 0;
   bottom: 0;
-  width: 300px;
-  background: linear-gradient(to right, rgb(223, 88, 88), rgb(37, 37, 45));
-  border-bottom-right-radius: 25px;
+  width: 100px;
+  /* background: linear-gradient(to right, rgb(85, 84, 84), rgb(37, 37, 45)); */
+  /* border-bottom-right-radius: 15px;
+  border-top-right-radius: 15px; */
 }
 
 button {
@@ -116,10 +116,6 @@ li {
   z-index: 100;
   cursor: pointer;
 } */
-
-#menu-item.active {
-  color: indianred;
-}
 
 #menu-item.active {
   color: indianred;

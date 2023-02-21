@@ -1,16 +1,26 @@
+import React, { Suspense } from 'react';
 import { Canvas } from '@react-three/fiber';
 import { TrackballControls, Html } from '@react-three/drei';
 import { stackData } from '../data/stackData';
 import { useMediaQuery } from '@chakra-ui/react';
 import FooterLinks from '../components/FooterLinks';
 import Cloud from '../components/tech-stack/Cloud';
+import { Center } from '@chakra-ui/react';
 
 export default function TechStack() {
   const [isMobile] = useMediaQuery('(max-width: 400px)');
   const [isLessThan820] = useMediaQuery('(max-width: 820px)');
 
   return (
-    <>
+    <Suspense
+      fallback={
+        <Center>
+          <span style={{ fontSize: '1rem', paddingTop: '40%' }}>
+            Loading...
+          </span>
+        </Center>
+      }
+    >
       <Canvas
         dpr={[1, 2]}
         camera={{
@@ -42,6 +52,6 @@ export default function TechStack() {
       <div style={{ position: 'absolute' }} className="footer">
         <FooterLinks />
       </div>
-    </>
+    </Suspense>
   );
 }
