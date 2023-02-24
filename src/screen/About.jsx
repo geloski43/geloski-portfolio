@@ -30,7 +30,7 @@ export default function About() {
         {showSideMenu ? null : (
           <Suspense
             fallback={
-              <Html position={[0, 0, -2]}>
+              <Html position={[-0.5, 1, -2]}>
                 <h2
                   style={{
                     fontSize: '2.4rem',

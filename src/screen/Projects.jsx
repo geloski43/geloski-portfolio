@@ -46,7 +46,7 @@ const Projects = () => {
       >
         <Suspense
           fallback={
-            <Html position={[0, 0, -2]}>
+            <Html position={[0, -0.57, -2]}>
               <h2
                 style={{
                   fontSize: '2.4rem',

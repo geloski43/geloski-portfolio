@@ -21,7 +21,7 @@ export default function TechStack() {
       >
         <Suspense
           fallback={
-            <Html position={[0, 0, -2]}>
+            <Html position={[-1, 1, -2]}>
               <h2
                 style={{
                   fontSize: '2.4rem',
