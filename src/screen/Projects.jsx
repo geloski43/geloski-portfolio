@@ -1,5 +1,6 @@
 import React, { Suspense, useEffect, useRef, useContext, useMemo } from 'react';
 import { Canvas } from '@react-three/fiber';
+import { Html } from '@react-three/drei';
 import state from '../store';
 import AnimatedSwitch from '../components/projects/switch/AnimatedSwitch';
 import FooterLinks from '../components/FooterLinks';
@@ -43,26 +44,48 @@ const Projects = () => {
         orthographic
         camera={{ zoom: state.zoom, position: [0, 0, 500] }}
       >
-        <ProjectsList />
+        <Suspense
+          fallback={
+            <Html position={[0, 0, -2]}>
+              <h2
+                style={{
+                  fontSize: '2.4rem',
+                }}
+              >
+                <span style={{ fontSize: '0.82em' }}>Loading</span>
+                <br />
+                <span>...</span>
+                <br />
+                <span style={{ fontSize: '.45em' }}></span>
+              </h2>
+            </Html>
+          }
+        >
+          <ProjectsList />
+        </Suspense>
         <Startup />
       </Canvas>
 
-      <div
-        style={{ height: '100vh' }}
-        className="scrollArea"
-        ref={scrollArea}
-        onScroll={onScroll}
-      >
-        <AnimatedSwitch />
-        {new Array(memoizedSections).fill().map((_, index) => (
-          <div
-            key={index}
-            id={'0' + index}
-            style={{ height: `${(memoizedPages / memoizedSections) * 100}vh` }}
-          />
-        ))}
-        <FooterLinks />
-      </div>
+      <Suspense fallback={null}>
+        <div
+          style={{ height: '100vh' }}
+          className="scrollArea"
+          ref={scrollArea}
+          onScroll={onScroll}
+        >
+          <AnimatedSwitch />
+          {new Array(memoizedSections).fill().map((_, index) => (
+            <div
+              key={index}
+              id={'0' + index}
+              style={{
+                height: `${(memoizedPages / memoizedSections) * 100}vh`,
+              }}
+            />
+          ))}
+          <FooterLinks />
+        </div>
+      </Suspense>
     </>
   );
 };

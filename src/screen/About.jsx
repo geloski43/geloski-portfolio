@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import { Canvas } from '@react-three/fiber';
 import { useMediaQuery } from '@chakra-ui/react';
 import FooterLinks from '../components/FooterLinks';
 import { Context as AppContext } from '../context/appContext';
 import Typography from '../components/about/Typography';
 import Lens from '../components/about/Lens';
+import { Html } from '@react-three/drei';
 
 export default function About() {
   const [isMoreThan1200] = useMediaQuery('(min-width: 1200px)');
@@ -27,9 +28,27 @@ export default function About() {
         }}
       >
         {showSideMenu ? null : (
-          <Lens>
-            <Typography />
-          </Lens>
+          <Suspense
+            fallback={
+              <Html position={[0, 0, -2]}>
+                <h2
+                  style={{
+                    fontSize: '2.4rem',
+                  }}
+                >
+                  <span style={{ fontSize: '0.82em' }}>Loading</span>
+                  <br />
+                  <span>...</span>
+                  <br />
+                  <span style={{ fontSize: '.45em' }}></span>
+                </h2>
+              </Html>
+            }
+          >
+            <Lens>
+              <Typography />
+            </Lens>
+          </Suspense>
         )}
       </Canvas>
       <div style={{ position: 'absolute' }} className="footer">
