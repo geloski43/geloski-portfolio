@@ -43,6 +43,7 @@ const Projects = () => {
         dpr={[1, 2]}
         orthographic
         camera={{ zoom: state.zoom, position: [0, 0, 500] }}
+        style={{ maxWidth: '1300px', height: '100%', margin: 'auto' }}
       >
         <Suspense
           fallback={
@@ -65,7 +66,6 @@ const Projects = () => {
         </Suspense>
         <Startup />
       </Canvas>
-
       <Suspense fallback={null}>
         <div
           style={{ height: '100vh' }}

@@ -25,6 +25,12 @@ body {
   /* background: linear-gradient(to top, rgb(1, 6, 19), rgb(76, 166, 205)); */
 }
 
+.canvas-container {
+  max-width: '1400px';
+  height: '100%';
+  margin: 'auto';
+}
+
 a {
   color: #545454;
   text-decoration: none;

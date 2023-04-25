@@ -18,6 +18,11 @@ export default function TechStack() {
           position: [1, 0, 35],
           fov: isMobile ? 135 : isLessThan820 ? 130 : 110,
         }}
+        style={{
+          maxWidth: '1300px',
+          height: '100%',
+          margin: 'auto',
+        }}
       >
         <Suspense
           fallback={

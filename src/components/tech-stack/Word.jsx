@@ -29,7 +29,14 @@ export default function Word({ item, children, ...props }) {
   const out = () => setHovered(false);
   // Change the mouse cursor on hover
   useEffect(() => {
-    if (hovered) document.body.style.cursor = 'pointer';
+    if (hovered) {
+      document.body.style.cursor = 'pointer';
+    } else if (!hovered) {
+      document.body.style.cursor = `url(
+      'https://res.cloudinary.com/geloski43/image/upload/c_scale,w_85/v1682432203/360_scmdug.png'
+    ),
+    auto`;
+    }
     return () => (document.body.style.cursor = 'auto');
   }, [hovered]);
   // Tie component to the render-loop

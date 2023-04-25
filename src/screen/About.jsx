@@ -21,6 +21,9 @@ export default function About() {
             'https://res.cloudinary.com/geloski43/image/upload/b_rgb:454545,c_scale,co_rgb:ffffff,e_bgremoval,h_45,r_30,w_45/v1622636112/vr8mhfbrgpnsq0ns4bk8.jpg'
           ),
           auto`,
+          maxWidth: '1300px',
+          height: '100%',
+          margin: 'auto',
         }}
         camera={{
           position: [0, 0, 20],
